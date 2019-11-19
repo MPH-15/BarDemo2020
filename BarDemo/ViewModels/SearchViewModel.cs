@@ -1,20 +1,36 @@
 ﻿using System;
-
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+using System.Diagnostics;
+using Xamarin.Auth;
+using Xamarin.Essentials;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Json;
 using Xamarin.Forms;
+using BarDemo.Views;
+using BarDemo.Services;
+using BarDemo.Models;
+using System.Threading.Tasks;
+using Xamarin.Auth;
 
 namespace BarDemo.ViewModels
 {
-    public class SearchViewModel : ContentPage
+    public class SearchViewModel : BaseViewModel
     {
-        public SearchViewModel()
+
+        public SearchViewModel(INavService navService) : base(navService)
         {
-            Content = new StackLayout
-            {
-                Children = {
-                    new Label { Text = "Hello ContentPage" }
-                }
-            };
+
         }
+
+
+        public override async Task Init()
+        {
+
+        }
+
     }
 }
 

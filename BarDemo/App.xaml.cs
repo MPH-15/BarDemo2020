@@ -26,9 +26,25 @@ namespace BarDemo
         {
             InitializeComponent();
 
+            var navService = DependencyService.Get<INavService>() as NavService;
 
-           MainPage = new NavigationPage(new LoginPage());
-           //MainPage = new TabPage();
+           // ToDo: Don't require that someone logs in everytime. Save Is 
+           // User Logged in somewhere. 
+            if (!IsUserLoggedIn)
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new TabPage());
+                //MainPage = new TabPage();
+            }
+
+            navService.XamarinFormsNav = MainPage.Navigation;
+
+            navService.RegisterViewMapping(typeof(SearchViewModel), typeof(TabPage));
+            navService.RegisterViewMapping(typeof(LoginViewModel), typeof(LoginPage));
+            navService.RegisterViewMapping(typeof(ProfileViewModel), typeof(ProfilePage));
 
         }
 
