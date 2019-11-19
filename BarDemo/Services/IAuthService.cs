@@ -6,10 +6,14 @@ namespace BarDemo.Services
 {
     public interface IAuthService
     {
-        Task SignInAsync(string clientId,
+        void SignInAsync(string clientId,
                          Uri authUrl,
-                         Uri callbackUrl,
-                         Action<string> tokenCallback,
-                         Action<string> errorCallback);
+                         Uri callbackUrl
+                         );
+                        //(string clientId,
+                        //Uri authUrl,
+                        //Uri callbackUrl,
+                        //Action<string> tokenCallback,
+                        //Action<string> errorCallback);
     }
 }

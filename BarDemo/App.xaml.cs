@@ -27,7 +27,7 @@ namespace BarDemo
             InitializeComponent();
 
 
-           MainPage = new NavigationPage(new TabPage());
+           MainPage = new NavigationPage(new LoginPage());
            //MainPage = new TabPage();
 
         }
