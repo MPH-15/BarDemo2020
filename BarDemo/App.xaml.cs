@@ -28,7 +28,8 @@ namespace BarDemo
 
             var navService = DependencyService.Get<INavService>() as NavService;
 
-
+           // ToDo: Don't require that someone logs in everytime. Save Is 
+           // User Logged in somewhere. 
             if (!IsUserLoggedIn)
             {
                 MainPage = new NavigationPage(new LoginPage());
@@ -44,7 +45,6 @@ namespace BarDemo
             navService.RegisterViewMapping(typeof(SearchViewModel), typeof(TabPage));
             navService.RegisterViewMapping(typeof(LoginViewModel), typeof(LoginPage));
             navService.RegisterViewMapping(typeof(ProfileViewModel), typeof(ProfilePage));
-
 
         }
 

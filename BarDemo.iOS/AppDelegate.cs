@@ -23,6 +23,8 @@ namespace BarDemo.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            // Portion below added for FB Authentication.
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
 
             // runs without using Xamarin.FormsMaps.Init();
