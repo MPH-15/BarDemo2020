@@ -16,12 +16,13 @@ namespace BarDemo.ViewModels
         public Command OnFBButtonClickedCommand => new Command(OnFBButtonClicked);
 
         //Starts FB authentication process using FBAuthService
-        private void OnFBButtonClicked()
+        private async void OnFBButtonClicked()
         {
             var FBAuth = new FBAuthService();
 
-            FBAuth.SignInAsync("421753182028932", new Uri("https://m.facebook.com/dialog/oauth/"), new Uri("https://bardemo.azurewebsites.net/.auth/login/facebook/callback"));
+           await FBAuth.SignInAsync("421753182028932", new Uri("https://m.facebook.com/dialog/oauth/"), new Uri("https://bardemo.azurewebsites.net/.auth/login/facebook/callback"));
 
+            //FBAuth.FBDataRequest("name");
 
         }
 
