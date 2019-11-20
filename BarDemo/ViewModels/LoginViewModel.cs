@@ -47,61 +47,14 @@ namespace BarDemo.ViewModels
         }
 
 
-        // ToDo: Need to clean up the OnAuthCompleted -- Right now it doesnt use this. 
-
-        public async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
-        {
-            var authenticator = sender as OAuth2Authenticator;
-            if (authenticator != null)
-            {
-                authenticator.Completed -= OnAuthCompleted;
-                authenticator.Error -= OnAuthError;
-            }
-
-            GUser user = null;
-            if (e.IsAuthenticated)
-            {
-                GMailAuth = true;
-                // If the user is authenticated, request their basic user data from Google
-                // UserInfoUrl = https://www.googleapis.com/oauth2/v2/userinfo
-                var request = new OAuth2Request("GET", new Uri(Constants.UserInfoUrl), null, e.Account);
-
-                var response = await request.GetResponseAsync();
-                if (response != null)
-                {
-
-                    // Deserialize the data and store it in the account store
-                    // The users email address will be used to identify data in SimpleDB
-                    string userJson = await response.GetResponseTextAsync();
-                    user = JsonConvert.DeserializeObject<GUser>(userJson);
-                    Debug.WriteLine("Email : " + user.Email);
-                    Debug.WriteLine("Verified Email?: " + user.VerifiedEmail);
-                    Debug.WriteLine("Family Name : " + user.FamilyName);
-                    Debug.WriteLine("Given Name : " + user.GivenName);
-                    Debug.WriteLine("Name : " + user.Name);
-                    Debug.WriteLine("Picture : " + user.Picture);
-                    Debug.WriteLine("Gender : " + user.Locale);
-
-
-                }
-
-                if (account != null)
-                {
-                    //store.Delete(account, Constants.AppName);
-                    Debug.WriteLine("Account isn't null");
-                }
-
-                await ExecuteSearchCommand();
-
-            }
-        }
+      
 
         public void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
         {
             var authenticator = sender as OAuth2Authenticator;
             if (authenticator != null)
             {
-                authenticator.Completed -= OnAuthCompleted;
+                authenticator.Completed -= OnFBAuthCompleted;
                 authenticator.Error -= OnAuthError;
             }
 
@@ -156,7 +109,7 @@ namespace BarDemo.ViewModels
             var authenticator = sender as OAuth2Authenticator;
             if (authenticator != null)
             {
-                authenticator.Completed -= OnAuthCompleted;
+                authenticator.Completed -= OnFBAuthCompleted;
                 authenticator.Error -= OnAuthError;
             }
 

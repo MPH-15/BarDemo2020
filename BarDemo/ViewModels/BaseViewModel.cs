@@ -51,13 +51,13 @@ namespace BarDemo.ViewModels
             }
         }
 
-        //protected BaseViewModel(INavService navService)
-        //{
-        //    NavService = navService;
-        //}
+        protected BaseViewModel(INavService navService)
+        {
+            NavService = navService;
+        }
 
 
-        //public abstract Task Init();
+        public abstract Task Init();
 
 
         /*
@@ -91,17 +91,17 @@ namespace BarDemo.ViewModels
 
     }
 
-    //public abstract class BaseViewModel<TParameter> : BaseViewModel
-    //{
-    //    protected BaseViewModel(INavService navService) : base(navService)
-    //    {
-    //    }
+    public abstract class BaseViewModel<TParameter> : BaseViewModel
+    {
+        protected BaseViewModel(INavService navService) : base(navService)
+        {
+        }
 
-    //    public override async Task Init()
-    //    {
-    //        await Init(default(TParameter));
-    //    }
+        public override async Task Init()
+        {
+            await Init(default(TParameter));
+        }
 
-    //    public abstract Task Init(TParameter parameter);
-    //}
+        public abstract Task Init(TParameter parameter);
+    }
 }

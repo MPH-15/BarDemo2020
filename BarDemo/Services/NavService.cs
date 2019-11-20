@@ -42,24 +42,25 @@ namespace BarDemo.Services
             OnCanGoBackChanged();
         }
 
-        //public async Task NavigateTo<TVM>() where TVM : BaseViewModel
-        //{
-        //    await NavigateToView(typeof(TVM));
+        public async Task NavigateTo<TVM>() where TVM : BaseViewModel
+        {
+            await NavigateToView(typeof(TVM));
 
-        //    if (XamarinFormsNav.NavigationStack.Last().BindingContext is BaseViewModel)
-        //    {
-        //        await ((BaseViewModel)(XamarinFormsNav.NavigationStack.Last().BindingContext)).Init();
-        //    }
-        //}
-        //public async Task NavigateTo<TVM, TParameter>(TParameter parameter) where TVM : BaseViewModel
-        //{
-        //    await NavigateToView(typeof(TVM));
+            if (XamarinFormsNav.NavigationStack.Last().BindingContext is BaseViewModel)
+            {
+                await ((BaseViewModel)(XamarinFormsNav.NavigationStack.Last().BindingContext)).Init();
+            }
+        }
+        public async Task NavigateTo<TVM, TParameter>(TParameter parameter) where TVM : BaseViewModel
+        {
+            await NavigateToView(typeof(TVM));
 
-        //    if (XamarinFormsNav.NavigationStack.Last().BindingContext is BaseViewModel<TParameter>)
-        //    {
-        //        await ((BaseViewModel<TParameter>)(XamarinFormsNav.NavigationStack.Last().BindingContext)).Init(parameter);
-        //    }
-        //}
+            if (XamarinFormsNav.NavigationStack.Last().BindingContext is BaseViewModel<TParameter>)
+            {
+                await ((BaseViewModel<TParameter>)(XamarinFormsNav.NavigationStack.Last().BindingContext)).Init(parameter);
+            }
+        }
+
 
         public async Task RemoveLastView()
         {

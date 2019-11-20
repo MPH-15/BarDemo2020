@@ -43,7 +43,7 @@ namespace BarDemo.Models
         //
         // OAuth infomation
         public static string FBiOSClientId = "421753182028932";
-        public static string FBAndroidClientId = "<insert Android client ID here>";
+        public static string FBAndroidClientId = "421753182028932";
 
         // other information
 

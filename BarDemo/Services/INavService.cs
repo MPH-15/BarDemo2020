@@ -23,8 +23,8 @@ namespace BarDemo.Services
          *  The NavigateTo method defines a generic type and restricts its use to objects
          *  of the BaseViewModel class. 
          */
-        //Task NavigateTo<TVM>()
-        //    where TVM : BaseViewModel;
+        Task NavigateTo<TVM>()
+            where TVM : BaseViewModel;
 
         /*
          *  There is also an overloaded method that allows a strongly typed parameter
