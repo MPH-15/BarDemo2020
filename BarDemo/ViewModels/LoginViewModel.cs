@@ -158,7 +158,8 @@ namespace BarDemo.ViewModels
 
         async Task ExecuteSearchCommand()
         {
-            await NavService.NavigateTo<SearchViewModel>();
+            await NavService.NavigateTo<BarListViewModel>();
+            //await NavService.NavigateTo<SearchViewModel>();
             await NavService.RemoveLastView();
         }
 
