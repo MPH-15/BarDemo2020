@@ -44,6 +44,17 @@ namespace BarDemo.Services
             return response;
         }
 
+        public async Task<YelpBizSearch> BusinessSearch(string keyword, int limit, string location)
+        {
+            // https://api.yelp.com/v3/businesses/search?term=delis&latitude=29.425688&longitude=-98.493720&limit=5
+            string searchParameters = "businesses/search?" + "term=" + keyword + "&location=" + location + "&limit=" + limit;
+            Console.WriteLine(searchParameters);
+            var url = new Uri(_baseUri, searchParameters);
+            YelpBizSearch response = await SendRequestAsync<YelpBizSearch>(url, HttpMethod.Get, _headers);
+
+            return response;
+        }
+
 
     }
 }

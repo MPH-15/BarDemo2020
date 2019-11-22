@@ -26,7 +26,8 @@ namespace BarDemo.ViewModels
         {
             _blist = new ObservableCollection<Business>();
 
-            SearchYelp();
+            //Add parameters for search
+            SearchYelp("bars", 10, "san antonio");
            
             
         }
@@ -36,23 +37,19 @@ namespace BarDemo.ViewModels
             throw new NotImplementedException();
         }
 
-        public async void SearchYelp()
+        // Use Yelp data service to search for businesses 
+        public async void SearchYelp(string keyword, int limit, string location)
         {
             var yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
-            yelpsearch = await yds.BusinessSearch();
-            //blist = yelpsearch.businesses;
+            yelpsearch = await yds.BusinessSearch(keyword, limit, location  );
 
             Console.WriteLine(yelpsearch.total);
 
-
-            for (int i = 0; i < 5; i++)
+            //add businesses to observable collection to be displayed on barlist page
+            for (int i = 0; i < limit; i++)
             {
 
-                //blist[i].name = yelpsearch.businesses[i].name;
-                _blist.Add(new Business
-                {
-                    name = yelpsearch.businesses[i].name
-                });
+                _blist.Add(yelpsearch.businesses[i]);
                 Console.WriteLine(_blist[i].name);
 
             }
