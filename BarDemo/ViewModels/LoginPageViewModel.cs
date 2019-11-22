@@ -22,7 +22,7 @@ namespace BarDemo.ViewModels
 
            await FBAuth.SignInAsync("421753182028932", new Uri("https://m.facebook.com/dialog/oauth/"), new Uri("https://bardemo.azurewebsites.net/.auth/login/facebook/callback"));
 
-            //FBAuth.FBDataRequest("name");
+            FBAuth.FBDataRequest("name");
 
         }
 

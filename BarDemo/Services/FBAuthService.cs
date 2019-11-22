@@ -9,6 +9,7 @@ using System.Json;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Threading;
 
 namespace BarDemo.Services
 {
@@ -19,6 +20,7 @@ namespace BarDemo.Services
 
         Xamarin.Auth.Account Fbaccount;
         string fbtoken;
+        bool isAuthenticated = false;
 
         public async Task SignInAsync(string clientId, Uri authUrl, Uri callbackUrl)
         //public Task SignInAsync(string clientId, Uri authUrl, Uri callbackUrl, Action<string> tokenCallback, Action<string> errorCallback)
@@ -29,6 +31,10 @@ namespace BarDemo.Services
             auth.Completed += Auth_Completed;
             var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
             presenter.Login(auth);
+
+            await waitForAuth();
+
+
         }
 
         private async void Auth_Completed(object sender, AuthenticatorCompletedEventArgs e)
@@ -51,7 +57,8 @@ namespace BarDemo.Services
                 //var fbResponse = await request.GetResponseAsync();
                 //var fbuser = JsonValue.Parse(fbResponse.GetResponseText());
                 //var name = fbuser["name"];
-                //Debug.WriteLine(name + "*****************************");
+                isAuthenticated = true;
+                Debug.WriteLine("*****************************AUTHENTICATED");
 
                 await Application.Current.MainPage.Navigation.PushAsync(new TabPage());
             }
@@ -74,10 +81,24 @@ namespace BarDemo.Services
             HttpResponseMessage httpResponse = await httpClient.GetAsync("https://graph.facebook.com/me?fields=name&access_token=" + fbtoken);
 
             string fbresponse = await httpResponse.Content.ReadAsStringAsync();
+            string fbresponse1 = await httpClient.GetStringAsync("https://graph.facebook.com/me?fields=name&access_token=" + fbtoken);
             //var fbResponse = await request.GetResponseAsync();
-           // var fbuser = JsonValue.Parse(fbResponse.GetResponseText());
+            // var fbuser = JsonValue.Parse(fbResponse.GetResponseText());
             //var name = fbuser["name"];
             Debug.WriteLine(fbresponse + "*****************************");
+            Debug.WriteLine(fbresponse1 + "############################");
+        }
+
+        public async Task waitForAuth()
+        {
+            while (!isAuthenticated)
+            {
+                Console.WriteLine("not authenticated");
+                //Thread.Sleep(5000);
+                await Task.Delay(5000);
+            }
+
+            await Task.CompletedTask;
         }
     }
 
