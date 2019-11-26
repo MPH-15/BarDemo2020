@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-
+using System.Collections.ObjectModel;
 
 namespace BarDemo.Models
 {
     [JsonObject]
     public class YelpBizSearch
     {
-        public List<Business> businesses { get; set; }
+        public ObservableCollection<Business> businesses { get; set; }
         public int total { get; set; }
         public Region region { get; set; }
 

@@ -22,13 +22,19 @@ namespace BarDemo.ViewModels
 
         public SearchViewModel(INavService navService) : base(navService)
         {
-
+            //ExecuteBarListCommand();
         }
 
 
         public override async Task Init()
         {
 
+        }
+
+        async Task ExecuteBarListCommand()
+        {
+            await NavService.NavigateTo<BarListViewModel>();
+            await NavService.RemoveLastView();
         }
 
     }

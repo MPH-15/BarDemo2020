@@ -5,7 +5,7 @@
              x:Class="BarDemo.Views.TabPage"
              Title="BARS">
     <TabbedPage.Children>
-        <views:SearchPage />
+        <views:BarListPage />
         <views:MapPage />
         <views:ProfilePage />
     </TabbedPage.Children>             
