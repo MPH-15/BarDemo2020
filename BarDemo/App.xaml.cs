@@ -47,7 +47,7 @@ namespace BarDemo
             navService.RegisterViewMapping(typeof(LoginViewModel), typeof(LoginPage));
             navService.RegisterViewMapping(typeof(ProfileViewModel), typeof(ProfilePage));
             navService.RegisterViewMapping(typeof(BarListViewModel), typeof(BarListPage));
-
+            navService.RegisterViewMapping(typeof(MapViewModel), typeof(MapPage));
 
         }
 
