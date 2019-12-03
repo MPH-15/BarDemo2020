@@ -30,10 +30,12 @@ namespace BarDemo.Services
          *  There is also an overloaded method that allows a strongly typed parameter
          *  to be passed along with the navigation. 
          */
-        //Task NavigateTo<TVM, TParameter>(TParameter parameter)
-        //    where TVM : BaseViewModel;
+        Task NavigateTo<TVM, TParameter>(TParameter parameter)
+            where TVM : BaseViewModel;
+
         Task RemoveLastView();
         Task ClearBackStack();
         Task NavigateToUri(Uri uri);
+
     }
 }

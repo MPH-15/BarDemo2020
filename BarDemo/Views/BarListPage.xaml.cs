@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BarDemo.ViewModels;
 using BarDemo.Services;
+using BarDemo.Models;
+
 
 namespace BarDemo.Views
 {
@@ -15,6 +17,11 @@ namespace BarDemo.Views
     public partial class BarListPage : ContentPage
     {
         //public ObservableCollection<string> Items { get; set; }
+
+        BarListViewModel _vm
+        {
+            get { return BindingContext as BarListViewModel; }
+        }
 
         public BarListPage()
         {
@@ -43,10 +50,15 @@ namespace BarDemo.Views
             if (e.Item == null)
                 return;
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
+            var bar = (Business)e.Item;
+            _vm.BarCommand.Execute(bar);
+
+            //await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
 
             //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            //((ListView)sender).SelectedItem = null;
+            MyListView.SelectedItem = null;
         }
+
     }
 }

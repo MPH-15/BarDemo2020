@@ -5,6 +5,7 @@ using BarDemo.Services;
 using System.Collections.ObjectModel;
 using BarDemo.Models;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace BarDemo.ViewModels
 {
@@ -20,6 +21,17 @@ namespace BarDemo.ViewModels
                 OnPropertyChanged();
             }
         }
+
+
+        Command<Business> _barCommand;
+        public Command<Business> BarCommand
+        {
+            get
+            {
+                return _barCommand ?? (_barCommand = new Command<Business>(async (biz) => await ExecuteBarClickedCommand(biz)));
+            }
+        }
+
         private YelpBizSearch yelpsearch = new YelpBizSearch();
 
         public BarListViewModel(INavService navService) : base(navService)
@@ -51,10 +63,20 @@ namespace BarDemo.ViewModels
 
                 _blist.Add(yelpsearch.businesses[i]);
                 Console.WriteLine(_blist[i].name);
+                Console.WriteLine("Lattitude: " + _blist[i].coordinates.latitude);
+                Console.WriteLine("Longitude: " + _blist[i].coordinates.longitude);
 
             }
-
-
         }
+
+
+
+
+        async Task ExecuteBarClickedCommand(Business biz)
+        {
+            await NavService.NavigateTo<MapViewModel, Business>(biz);
+        }
+
+
     }
 }

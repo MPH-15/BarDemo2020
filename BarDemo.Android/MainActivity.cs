@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
+
+
 namespace BarDemo.Droid
 {
     [Activity(Label = "BarDemo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -23,6 +25,10 @@ namespace BarDemo.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             // Added for FB Authentication
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+            // Added the item below for custom map
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
+
+
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
