@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BarDemo.Views.BarListPage">
+             x:Class="BarDemo.Views.BarListPage"
+             BackgroundColor="Black"
+             Title="List View">
   <ListView x:Name="MyListView"
             ItemsSource="{Binding Blist}"
             ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True">
             
     <!--Built in Cells--><!--
     <ListView.ItemTemplate>
@@ -21,15 +24,19 @@
     
     <ListView.ItemTemplate>
       <DataTemplate>
-        <ViewCell>
-          <StackLayout Orientation="Horizontal">
-            <Label Text="{Binding name}" 
+        <ViewCell Height="200">
+          <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+            <Label Text="{Binding name}"
+                   TextColor="White"
                    Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding rating}" 
+            <Label Text="{Binding rating}"
+                   TextColor="White"
                    Style="{DynamicResource ListItemDetailTextStyle}"/>
-            <Label Text="{Binding distance}" 
+            <Label Text="{Binding distance}"
+                   TextColor="White"
                    Style="{DynamicResource ListItemDetailTextStyle}"
                    HorizontalOptions="EndAndExpand"/>
+            <Image Source="{Binding image_url}" AbsoluteLayout.LayoutBounds="0,0,1,1"   AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>
           </StackLayout>
         </ViewCell>
       </DataTemplate>
