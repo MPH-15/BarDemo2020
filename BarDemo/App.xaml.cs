@@ -32,8 +32,8 @@ namespace BarDemo
            // User Logged in somewhere. 
             if (!IsUserLoggedIn)
             {
-                MainPage = new NavigationPage(new LoginPage());
-                //MainPage = new NavigationPage(new BarListPage());
+                //MainPage = new NavigationPage(new LoginPage());
+                MainPage = new NavigationPage(new BarListPage());
             }
             else
             {
