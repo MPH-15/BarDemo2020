@@ -4,16 +4,15 @@
              xmlns:local="clr-namespace:BarDemo.Models;assembly=BarDemo"
              xmlns:local1="clr-namespace:BarDemo"
              x:Class="BarDemo.Views.MapPage"
-             Title="Spots">
-             
-             <!-- commented this out of <ContentPage> : Icon = "shaker.png -->
+             Title="Spots"
+             Icon="shaker.png">
     <ContentPage.Content>
         <local:CustomMap x:Name="customMap"
-                         ItemsSource="{Binding cMap}"
                          MapType="Street"
                          WidthRequest="{x:Static local1:App.ScreenWidth}"
                          HeightRequest="{x:Static local1:App.ScreenHeight}" />
         <!--
+                ItemSource="{Binding cMap}"
                 WidthRequest="{x:Static local1:App.ScreenWidth}"
                 HeightRequest="{x:Static local1:App.ScreenHeight}"
         -->

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarDemo.Views.BarListPage"
              BackgroundColor="Black"
-             Title="List View">
+             Title="Bar List"
+             Icon="search.png">
   <ListView x:Name="MyListView"
             ItemsSource="{Binding Blist}"
             ItemTapped="Handle_ItemTapped"
