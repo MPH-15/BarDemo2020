@@ -1,0 +1,15 @@
+﻿^ContentPage
+{
+	background-color: white;
+}
+
+stacklayout.outer
+{
+margin-top: 10;
+}
+
+Image
+{
+	margin-left:5;
+	margin-right:5;
+}

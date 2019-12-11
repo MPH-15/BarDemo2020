@@ -62,6 +62,7 @@ namespace BarDemo.ViewModels
             {
 
                 _blist.Add(yelpsearch.businesses[i]);
+                _blist[i].distance = (int)yelpsearch.businesses[i].distance;
                 Console.WriteLine(_blist[i].name);
                 Console.WriteLine("Lattitude: " + _blist[i].coordinates.latitude);
                 Console.WriteLine("Longitude: " + _blist[i].coordinates.longitude);

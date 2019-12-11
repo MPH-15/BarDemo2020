@@ -5,13 +5,25 @@
              BackgroundColor="Black"
              Title="Bar List"
              Icon="search.png">
-  <ListView x:Name="MyListView"
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <StyleSheet Source="/Styles/mycss.css"/>
+            <Style x:Key="captions" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Caption"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <ListView x:Name="MyListView"
+
             ItemsSource="{Binding Blist}"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement"
             HasUnevenRows="True">
-            
-    <!--Built in Cells--><!--
+
+            <!--Built in Cells-->
+            <!--
     <ListView.ItemTemplate>
         <DataTemplate>
             <TextCell Text="{Binding name}"
@@ -20,28 +32,38 @@
             
         </DataTemplate>
     </ListView.ItemTemplate>-->
-    
-    <!--Custom View Cells-->
-    
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell Height="200">
-          <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-            <Label Text="{Binding name}"
-                   TextColor="White"
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding rating}"
-                   TextColor="White"
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-            <Label Text="{Binding distance}"
-                   TextColor="White"
-                   Style="{DynamicResource ListItemDetailTextStyle}"
-                   HorizontalOptions="EndAndExpand"/>
-            <Image Source="{Binding image_url}" AbsoluteLayout.LayoutBounds="0,0,1,1"   AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    
-  </ListView>
+
+            <!--Custom View Cells-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" StyleClass="outer">
+                            <StackLayout>
+                                <!--<Image Source="{Binding image_url}" AbsoluteLayout.LayoutBounds="0,0,1,1"   AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>-->
+                                <Image StyleClass="Images" Source="{Binding image_url}" HeightRequest="100" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                <Label Text="{Binding name}"
+                                   FontAttributes="Bold"
+                                   FontSize="Body"
+                                   TextColor="Black"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                                <Label Text="{Binding rating, StringFormat='Stars: {0}'}"
+                                   Style="{StaticResource captions}"/>
+                                <Label Text="{Binding review_count, StringFormat='({0})'}"
+                                   Style="{StaticResource captions}"/>
+                                </StackLayout>
+                                <Label Text="{Binding distance, StringFormat= '{}{0}mi.'}"
+                                   Style="{StaticResource captions}"/>
+                                <Label Text="{Binding is_closed, StringFormat= 'Open: {0}'}"
+                                   Style="{StaticResource captions}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </ScrollView>
 </ContentPage>

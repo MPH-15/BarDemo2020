@@ -6,5 +6,9 @@
              mc:Ignorable="d"
              x:Class="BarDemo.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <!--<ControlTemplate x:Key="Theme1">
+            </ControlTemplate>-->
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
