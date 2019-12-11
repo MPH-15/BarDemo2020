@@ -12,6 +12,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace BarDemo.Views
 {
@@ -38,8 +39,7 @@ namespace BarDemo.Views
                 return;
             }
 
-            // Center the map around the log entry's location
-            //cmap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_vm.Entry.Latitude, _vm.Entry.Longitude), Distance.FromMiles(.5)));
+
             customMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_vm.Bar.coordinates.latitude, _vm.Bar.coordinates.longitude), Distance.FromMiles(2)));
             // Place a pin on the map for the log entry's location
             customMap.Pins.Add(new Pin
@@ -48,6 +48,8 @@ namespace BarDemo.Views
                 Label = _vm.Bar.name,
                 Position = new Position(_vm.Bar.coordinates.latitude, _vm.Bar.coordinates.longitude)
             });
+
+
         }
 
         void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs args)
