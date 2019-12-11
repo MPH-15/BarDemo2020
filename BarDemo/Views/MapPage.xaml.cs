@@ -39,44 +39,25 @@ namespace BarDemo.Views
                 return;
             }
 
-            // Center the map around the log entry's location
-            //cmap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_vm.Entry.Latitude, _vm.Entry.Longitude), Distance.FromMiles(.5)));
-
-            // Place a pin on the map for the log entry's location
-            //customMap.Pins.Add(new Pin
-            //{
-            //    Type = PinType.Place,
-            //    Label = _vm.Bar.name,
-            //    Position = new Position(_vm.Bar.coordinates.latitude, _vm.Bar.coordinates.longitude)
-            //});
-
-            var pin1 = new BarDemo.Models.CustomPin
-            {
-                Type = PinType.Place,
-                Position = new Position(_vm.Bar.coordinates.latitude, _vm.Bar.coordinates.longitude),
-                Label = _vm.Bar.name,
-                Address = _vm.Bar.location.address1,
-                
-                Color = "Green"
-
-            };
-
-            
-            customMap.CustomPins = new List<BarDemo.Models.CustomPin> { pin1 };
-            customMap.Pins.Add(pin1);
 
             customMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_vm.Bar.coordinates.latitude, _vm.Bar.coordinates.longitude), Distance.FromMiles(2)));
+            // Place a pin on the map for the log entry's location
+            customMap.Pins.Add(new Pin
+            {
+                Type = PinType.Place,
+                Label = _vm.Bar.name,
+                Position = new Position(_vm.Bar.coordinates.latitude, _vm.Bar.coordinates.longitude)
+            });
+
 
         }
 
         void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            UpdateMap();
-
-            //if (args.PropertyName == nameof(MapViewModel.Bar))
-            //{
-            //    UpdateMap();
-            //}
+            if (args.PropertyName == nameof(MapViewModel.Bar))
+            {
+                UpdateMap();
+            }
         }
 
         protected override void OnAppearing()
