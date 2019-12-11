@@ -12,9 +12,7 @@
             <Button />
             <Button />
             <Button />
-            <Button />
-            <Button />
-            <Button />
+
 
 
             <Button Text="Sign in with Facebook"
