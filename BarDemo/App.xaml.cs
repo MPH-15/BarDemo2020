@@ -32,8 +32,8 @@ namespace BarDemo
            // User Logged in somewhere. 
             if (!IsUserLoggedIn)
             {
-                MainPage = new NavigationPage(new LoginPage());
-                //MainPage = new NavigationPage(new BarListPage());
+                //MainPage = new NavigationPage(new LoginPage());
+                MainPage = new NavigationPage(new BarListPage());
             }
             else
             {
@@ -48,6 +48,7 @@ namespace BarDemo
             navService.RegisterViewMapping(typeof(ProfileViewModel), typeof(ProfilePage));
             navService.RegisterViewMapping(typeof(BarListViewModel), typeof(BarListPage));
             navService.RegisterViewMapping(typeof(MapViewModel), typeof(MapPage));
+            navService.RegisterViewMapping(typeof(BarDetailViewModel), typeof(BarDetailPage));
 
         }
 

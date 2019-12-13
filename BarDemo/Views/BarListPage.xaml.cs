@@ -29,17 +29,6 @@ namespace BarDemo.Views
             BindingContext = new BarListViewModel(DependencyService.Get<INavService>());
 
 
-            //Items = new ObservableCollection<string>
-            //{
-            //    "Item 1",
-            //    "Item 2",
-            //    "Item 3",
-            //    "Item 4",
-            //    "Item 5"
-            //};
-
-            //MyListView.ItemsSource = Items;
-
             if (IsBusy)
                 return;
             IsBusy = true;
@@ -50,15 +39,26 @@ namespace BarDemo.Views
             if (e.Item == null)
                 return;
 
+            // Initate opening for BarDetailPage passing current bar as argument
             var bar = (Business)e.Item;
-            _vm.BarCommand.Execute(bar);
+            await _vm.ExecuteBarDetailsCommand(bar);
+            //_vm.BarCommand.Execute(bar);
 
-            //await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-            //Deselect Item
-            //((ListView)sender).SelectedItem = null;
-            MyListView.SelectedItem = null;
         }
 
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            //if (e.Item == null)
+            //    return;
+
+            //var bar = (Business)e.Item;
+            //_vm.BarCommand.Execute(bar);
+
+            await DisplayAlert("Item Tapped", "A map button was tapped.", "OK");
+
+            //Deselect Item
+            //((ListView)sender).SelectedItem = null
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace BarDemo.ViewModels
         }
 
 
+
         Command<Business> _barCommand;
         public Command<Business> BarCommand
         {
@@ -31,6 +32,7 @@ namespace BarDemo.ViewModels
                 return _barCommand ?? (_barCommand = new Command<Business>(async (biz) => await ExecuteBarClickedCommand(biz)));
             }
         }
+
 
         private YelpBizSearch yelpsearch = new YelpBizSearch();
 
@@ -70,14 +72,17 @@ namespace BarDemo.ViewModels
             }
         }
 
-
-
-
         async Task ExecuteBarClickedCommand(Business biz)
         {
             await NavService.NavigateTo<MapViewModel, Business>(biz);
         }
 
+        //Navigate to BarDetailViewModel
+        public async Task ExecuteBarDetailsCommand(Business biz)
+        {
+            await NavService.NavigateTo<BarDetailViewModel, Business>(biz);
+
+        }
 
     }
 }

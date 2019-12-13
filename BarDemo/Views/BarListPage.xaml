@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarDemo.Views.BarListPage"
-             BackgroundColor="Black"
              Title="Bar List"
              Icon="search.png">
     <ContentPage.Resources>
@@ -21,37 +20,24 @@
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement"
             HasUnevenRows="True">
-
-            <!--Built in Cells-->
-            <!--
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding name}"
-                      Detail="{Binding rating}"/>
-            
-            
-        </DataTemplate>
-    </ListView.ItemTemplate>-->
-
-            <!--Custom View Cells-->
             <ListView.ItemTemplate>
                 <DataTemplate>
-
                     <ViewCell>
                         <StackLayout Orientation="Vertical" StyleClass="outer">
                             <StackLayout>
                                 <!--<Image Source="{Binding image_url}" AbsoluteLayout.LayoutBounds="0,0,1,1"   AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>-->
                                 <Image StyleClass="Images" Source="{Binding image_url}" HeightRequest="100" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
                             </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                                 <Label Text="{Binding name}"
                                    FontAttributes="Bold"
                                    FontSize="Body"
                                    TextColor="Black"/>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
-                                <Label Text="{Binding rating, StringFormat='Stars: {0}'}"
+                                    <Label Text="{Binding rating, StringFormat='Stars: {0}'}"
                                    Style="{StaticResource captions}"/>
-                                <Label Text="{Binding review_count, StringFormat='({0})'}"
+                                    <Label Text="{Binding review_count, StringFormat='({0})'}"
                                    Style="{StaticResource captions}"/>
                                 </StackLayout>
                                 <Label Text="{Binding distance, StringFormat= '{}{0}mi.'}"
@@ -59,11 +45,12 @@
                                 <Label Text="{Binding is_closed, StringFormat= 'Open: {0}'}"
                                    Style="{StaticResource captions}"/>
                             </StackLayout>
+                                <Button Text="View on Map" Clicked="Button_Clicked" ></Button>
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
     </ScrollView>
 </ContentPage>
