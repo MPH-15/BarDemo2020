@@ -15,14 +15,13 @@
     </ContentPage.Resources>
     <ScrollView>
         <ListView x:Name="MyListView"
-
             ItemsSource="{Binding Blist}"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement"
             HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell x:Name="Item">
                         <StackLayout Orientation="Vertical" StyleClass="outer">
                             <StackLayout>
                                 <!--<Image Source="{Binding image_url}" AbsoluteLayout.LayoutBounds="0,0,1,1"   AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>-->
@@ -45,7 +44,8 @@
                                 <Label Text="{Binding is_closed, StringFormat= 'Open: {0}'}"
                                    Style="{StaticResource captions}"/>
                             </StackLayout>
-                                <Button Text="View on Map" Clicked="Button_Clicked" ></Button>
+                                <!--Pass ViewCell item (Business) as a parameter when View on Map button is clicked-->
+                                <Button Text="View on Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}" Command="{Binding ViewMapButtonCommand}"  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"></Button>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

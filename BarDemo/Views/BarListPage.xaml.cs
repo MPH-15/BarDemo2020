@@ -47,18 +47,19 @@ namespace BarDemo.Views
         }
 
 
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            //if (e.Item == null)
-            //    return;
+        //private async void Button_Clicked(object sender, EventArgs e)
+        //{
+        //    //if (e.Item == null)
+        //    //    return;
 
-            //var bar = (Business)e.Item;
-            //_vm.BarCommand.Execute(bar);
+        //    var bar = (Business)e.Item;
+        //    Console.WriteLine(bar.name);
+        //    //_vm.BarCommand.Execute(bar);
 
-            await DisplayAlert("Item Tapped", "A map button was tapped.", "OK");
+        //    await DisplayAlert("Item Tapped", "A map button was tapped.", "OK");
 
-            //Deselect Item
-            //((ListView)sender).SelectedItem = null
-        }
+        //    //Deselect Item
+        //    //((ListView)sender).SelectedItem = null
+        //}
     }
 }
