@@ -34,6 +34,13 @@ namespace BarDemo.Services
 
             return response;
         }
+        public async Task<BizDetails> BusinessSearch(string id)
+        {
+            var url = new Uri(_baseUri, ("businesses/" + id));
+            BizDetails response = await SendRequestAsync<BizDetails>(url, HttpMethod.Get, _headers);
+
+            return response;
+        }
 
         public async Task<YelpBizSearch> BusinessSearch(int limit, int radius)
         {
