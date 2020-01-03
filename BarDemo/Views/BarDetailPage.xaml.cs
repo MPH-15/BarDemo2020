@@ -13,11 +13,23 @@ namespace BarDemo.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BarDetailPage : ContentPage
 	{
-		public BarDetailPage ()
+        BarDetailViewModel _vm
+        {
+            get { return BindingContext as BarDetailViewModel; }
+        }
+
+        public BarDetailPage ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 
             BindingContext = new BarDetailViewModel(DependencyService.Get<INavService>());
-		}
-	}
+
+        }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+
+
+        }
+    }
 }

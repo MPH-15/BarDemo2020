@@ -30,9 +30,19 @@ namespace BarDemo.ViewModels
             }
         }
 
+        string _bizName;
+        public string BizName
+        {
+            get { return _bizName; }
+            set
+            {
+                _bizName = value;
+                OnPropertyChanged();
+            }
+        }
+
         public BarDetailViewModel(INavService navService) : base(navService)
         {
-
 
         }
 
@@ -49,9 +59,8 @@ namespace BarDemo.ViewModels
             _bizDetails = new BizDetails();
             YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
             _bizDetails = await yds.BusinessSearch(id);
-            Console.WriteLine(_bizDetails.hours[0].open[0].start);
-            //Console.WriteLine(_bar.id);
-            //await Task.CompletedTask;
+            BizName = _bizDetails.name;
+
 
         }
 
