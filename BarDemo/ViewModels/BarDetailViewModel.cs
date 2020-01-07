@@ -13,15 +13,36 @@ namespace BarDemo.ViewModels
     {
 
         Business _bar;
-        public Business bar
+        public Business Bar
         {
             get { return _bar; }
             set { _bar = value; }
         }
 
+        BizDetails _bizDetails;
+        public BizDetails BizDetails
+        {
+            get { return _bizDetails; }
+            set
+            {
+                _bizDetails = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string _bizName;
+        public string BizName
+        {
+            get { return _bizName; }
+            set
+            {
+                _bizName = value;
+                OnPropertyChanged();
+            }
+        }
+
         public BarDetailViewModel(INavService navService) : base(navService)
         {
-
 
         }
 
@@ -34,9 +55,12 @@ namespace BarDemo.ViewModels
         public override async Task Init(Business biz)
         {
             _bar = biz;
-            Console.WriteLine(_bar.name);
-            Console.WriteLine(_bar.id);
-            //await Task.CompletedTask;
+            string id = Bar.id;
+            _bizDetails = new BizDetails();
+            YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
+            BizDetails = await yds.BusinessSearch(id);
+            BizName = _bizDetails.name;
+
 
         }
 

@@ -2,11 +2,66 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarDemo.Views.BarDetailPage">
+
+    <NavigationPage.TitleView>
+        <Label Text="{Binding BizName}" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
+                <TableView>
+                    <TableRoot>
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Label FontSize="Small" Text="{Binding BizDetails.location.address1, StringFormat='{}{0},'}"/>
+                                    <Label FontSize="Small" Text="{Binding BizDetails.location.city, StringFormat='{}{0}, '}"/>
+                                    <Label FontSize="Small" Text="{Binding BizDetails.location.state, StringFormat='{}{0}, '}"/>
+                                    <Label FontSize="Small" Text="{Binding BizDetails.location.zip_code, StringFormat='{}{0} '}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Label FontSize="Small" Text="{Binding BizDetails.phone}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Label FontSize="Small" Text="{Binding BizDetails.url}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Label Text="{Binding BizDetails.hours[0].open[0].start}"/>
+                                    <Label Text=" - "/>
+                                    <Label Text="{Binding BizDetails.hours[0].open[0].end}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            </StackLayout>
+            <!--<ListView x:Name="DetailListView"
+                      ItemsSource="{Binding BizDetails}"
+                      ItemTapped="DetailListView_ItemTapped"
+                      CachingStrategy="RecycleElement"
+                      HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="Item">
+                            <StackLayout Orientation="Vertical">
+                                <L
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>-->
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>
