@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using BarDemo.Models;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace BarDemo.ViewModels
 {
@@ -22,16 +23,7 @@ namespace BarDemo.ViewModels
             }
         }
 
-
-        Command<Business> _barCommand;
-        public Command<Business> BarCommand
-        {
-            get
-            {
-                return _barCommand ?? (_barCommand = new Command<Business>(async (biz) => await ExecuteBarClickedCommand(biz)));
-            }
-        }
-
+        public ICommand ViewMapButtonCommand { get; }
         private YelpBizSearch yelpsearch = new YelpBizSearch();
 
         public BarListViewModel(INavService navService) : base(navService)
@@ -40,8 +32,10 @@ namespace BarDemo.ViewModels
 
             //Add parameters for search
             SearchYelp("bars", 10, "san antonio");
-           
-            
+
+            //Executes when ViewMapButton is Clicked
+            ViewMapButtonCommand = new Command<Business>(async (biz) => await ExecuteBarClickedCommand(biz));
+
         }
 
         public override Task Init()
@@ -69,15 +63,18 @@ namespace BarDemo.ViewModels
 
             }
         }
-
-
-
-
+        //Navigate to Map location of current bar passed in
         async Task ExecuteBarClickedCommand(Business biz)
         {
             await NavService.NavigateTo<MapViewModel, Business>(biz);
         }
 
+        //Navigate to BarDetailViewModel; Passes in business for detail page
+        public async Task ExecuteBarDetailsCommand(Business biz)
+        {
+            await NavService.NavigateTo<BarDetailViewModel, Business>(biz);
+
+        }
 
     }
 }

@@ -17,6 +17,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Views\BarDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\BarListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
