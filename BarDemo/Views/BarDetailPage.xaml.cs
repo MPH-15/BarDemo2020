@@ -31,5 +31,10 @@ namespace BarDemo.Views
 
 
         }
+
+        private void DetailListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+        }
     }
 }

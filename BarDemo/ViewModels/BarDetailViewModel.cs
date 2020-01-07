@@ -58,7 +58,7 @@ namespace BarDemo.ViewModels
             string id = Bar.id;
             _bizDetails = new BizDetails();
             YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
-            _bizDetails = await yds.BusinessSearch(id);
+            BizDetails = await yds.BusinessSearch(id);
             BizName = _bizDetails.name;
 
 
