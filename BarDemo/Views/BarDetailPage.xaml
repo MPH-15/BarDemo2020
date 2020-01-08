@@ -14,31 +14,37 @@
                         <TableSection>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
+                                    <ImageButton Source="directions.png"/>
+                                    <ImageButton Source="call.jpg"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" >
                                     <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.address1, StringFormat='{}{0},'}"/>
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.city, StringFormat='{}{0}, '}"/>
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.state, StringFormat='{}{0}, '}"/>
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.zip_code, StringFormat='{}{0} '}"/>
+                                    <Label FontSize="Micro"  Text="{Binding BizDetails.location.address1, StringFormat='{}{0},'}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.location.city, StringFormat='{}{0}, '}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.location.state, StringFormat='{}{0}, '}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.location.zip_code, StringFormat='{}{0} '}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Small" Text="{Binding BizDetails.phone}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.phone}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Small" Text="{Binding BizDetails.url}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.url}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <!--<Image Source="placeholder.png"/>-->
-                                    <Label Text="{Binding BizDetails.hours[0].open[0].start}"/>
-                                    <Label Text=" - "/>
-                                    <Label Text="{Binding BizDetails.hours[0].open[0].end}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.hours[0].open[0].start}"/>
+                                    <Label FontSize="Micro" Text=" - "/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.hours[0].open[0].end}"/>
                                 </StackLayout>
                             </ViewCell>
                         </TableSection>

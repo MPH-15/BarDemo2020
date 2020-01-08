@@ -137,4 +137,10 @@
     <BundleResource Include="Resources\search.png" />
     <BundleResource Include="Resources\shaker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\call.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\directions.png" />
+  </ItemGroup>
 </Project>
