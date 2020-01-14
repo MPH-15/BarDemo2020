@@ -41,6 +41,50 @@ namespace BarDemo.ViewModels
             }
         }
 
+        DateTime _dt;
+        public DateTime Dt
+        {
+            get { return _dt; }
+            set
+            {
+                _dt = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string _dayofweek;
+        public string DayOfWeek
+        {
+            get { return _dayofweek; }
+            set
+            {
+                _dayofweek = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string _hoursStart;
+        public string HoursStart
+        {
+            get { return _hoursStart; }
+            set
+            {
+                _hoursStart = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string _hoursEnd;
+        public string HoursEnd
+        {
+            get { return _hoursEnd; }
+            set
+            {
+                _hoursEnd = value;
+                OnPropertyChanged();
+            }
+        }
+
         public BarDetailViewModel(INavService navService) : base(navService)
         {
 
@@ -56,12 +100,41 @@ namespace BarDemo.ViewModels
         {
             _bar = biz;
             string id = Bar.id;
-            _bizDetails = new BizDetails();
+            BizDetails = new BizDetails();
             YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
             BizDetails = await yds.BusinessSearch(id);
-            BizName = _bizDetails.name;
+            BizName = BizDetails.name;
+            get_hour_details();
+            //Console.WriteLine(_dt.DayOfWeek);
+            Console.WriteLine(DayOfWeek);
+            Console.WriteLine(HoursStart);
+            Console.WriteLine(HoursEnd);
+            DayOfWeek = "Monday";
 
 
+        }
+
+        public void get_hour_details()
+        {
+            switch (Dt.DayOfWeek.ToString())
+            {
+                case "Monday":
+                    HoursStart = BizDetails.hours[0].open[1].start;
+                    Console.WriteLine(HoursStart);
+                    HoursEnd = BizDetails.hours[0].open[1].end;
+                    Console.WriteLine(HoursEnd);
+                    DayOfWeek = "Monday";
+
+                    break;
+
+                default:
+                    HoursStart = BizDetails.hours[0].open[0].start;
+                    HoursEnd = BizDetails.hours[0].open[0].end;
+                    DayOfWeek = "Other";
+                    Console.WriteLine(Dt.DayOfWeek.ToString());
+                    break;
+
+            }
         }
 
 

@@ -9,10 +9,10 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical">
-                <TableView>
+                <TableView HasUnevenRows="True">
                     <TableRoot>
                         <TableSection>
-                            <ViewCell>
+                            <ViewCell Height="20">
                                 <StackLayout Orientation="Horizontal">
                                     <ImageButton Source="directions.png"/>
                                     <ImageButton Source="call.jpg"/>
@@ -42,9 +42,10 @@
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Micro" Text="{Binding BizDetails.hours[0].open[0].start}"/>
+                                    <Label FontSize="Micro" Text="{Binding DayOfWeek}"/>
+                                    <Label FontSize="Micro" Text="{Binding HoursStart}"/>
                                     <Label FontSize="Micro" Text=" - "/>
-                                    <Label FontSize="Micro" Text="{Binding BizDetails.hours[0].open[0].end}"/>
+                                    <Label FontSize="Micro" Text="{Binding HoursEnd}"/>
                                 </StackLayout>
                             </ViewCell>
                         </TableSection>
