@@ -100,39 +100,69 @@ namespace BarDemo.ViewModels
         {
             _bar = biz;
             string id = Bar.id;
+            await get_bar_details(id);
+            get_hour_details();
+
+        }
+
+        public async Task get_bar_details(string id)
+        {
             BizDetails = new BizDetails();
             YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
             BizDetails = await yds.BusinessSearch(id);
             BizName = BizDetails.name;
-            get_hour_details();
-            //Console.WriteLine(_dt.DayOfWeek);
-            Console.WriteLine(DayOfWeek);
-            Console.WriteLine(HoursStart);
-            Console.WriteLine(HoursEnd);
-            DayOfWeek = "Monday";
-
 
         }
 
         public void get_hour_details()
         {
+            long t = DateTime.Now.Ticks;
+            Dt = new DateTime(t);
+
             switch (Dt.DayOfWeek.ToString())
             {
-                case "Monday":
-                    HoursStart = BizDetails.hours[0].open[1].start;
-                    Console.WriteLine(HoursStart);
-                    HoursEnd = BizDetails.hours[0].open[1].end;
-                    Console.WriteLine(HoursEnd);
-                    DayOfWeek = "Monday";
-
-                    break;
-
-                default:
+                case "Sunday":
                     HoursStart = BizDetails.hours[0].open[0].start;
                     HoursEnd = BizDetails.hours[0].open[0].end;
-                    DayOfWeek = "Other";
-                    Console.WriteLine(Dt.DayOfWeek.ToString());
+                    DayOfWeek = "Sunday";
                     break;
+
+                case "Monday":
+                    HoursStart = BizDetails.hours[0].open[1].start;
+                    HoursEnd = BizDetails.hours[0].open[1].end;
+                    DayOfWeek = "Monday";
+                    break;
+
+                case "Tuesday":
+                    HoursStart = BizDetails.hours[0].open[2].start;
+                    HoursEnd = BizDetails.hours[0].open[2].end;
+                    DayOfWeek = "Tuesday";
+                    break;
+
+                case "Wednesday":
+                    HoursStart = BizDetails.hours[0].open[3].start;
+                    HoursEnd = BizDetails.hours[0].open[3].end;
+                    DayOfWeek = "Wednesday";
+                    break;
+
+                case "Thursday":
+                    HoursStart = BizDetails.hours[0].open[4].start;
+                    HoursEnd = BizDetails.hours[0].open[4].end;
+                    DayOfWeek = "Thursday";
+                    break;
+
+                case "Friday":
+                    HoursStart = BizDetails.hours[0].open[5].start;
+                    HoursEnd = BizDetails.hours[0].open[5].end;
+                    DayOfWeek = "Friday";
+                    break;
+
+                case "Saturday":
+                    HoursStart = BizDetails.hours[0].open[6].start;
+                    HoursEnd = BizDetails.hours[0].open[6].end;
+                    DayOfWeek = "Saturday";
+                    break;
+
 
             }
         }
