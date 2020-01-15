@@ -7,8 +7,9 @@
         <Label Text="{Binding BizName}" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <ScrollView>
+
             <StackLayout Orientation="Vertical">
+            <StackLayout>
                 <TableView HasUnevenRows="True">
                     <TableRoot>
                         <TableSection>
@@ -20,7 +21,7 @@
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" >
-                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Image Source="placeholder.png"/>
                                     <Label FontSize="Micro"  Text="{Binding BizDetails.location.address1, StringFormat='{}{0},'}"/>
                                     <Label FontSize="Micro" Text="{Binding BizDetails.location.city, StringFormat='{}{0}, '}"/>
                                     <Label FontSize="Micro" Text="{Binding BizDetails.location.state, StringFormat='{}{0}, '}"/>
@@ -29,19 +30,19 @@
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Image Source="placeholder.png"/>
                                     <Label FontSize="Micro" Text="{Binding BizDetails.phone}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Image Source="placeholder.png"/>
                                     <Label FontSize="Micro" Text="{Binding BizDetails.url}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
+                                    <Image Source="placeholder.png"/>
                                     <Label FontSize="Micro" Text="{Binding DayOfWeek}"/>
                                     <Label FontSize="Micro" Text="{Binding HoursStart}"/>
                                     <Label FontSize="Micro" Text=" - "/>
@@ -51,24 +52,25 @@
                         </TableSection>
                     </TableRoot>
                 </TableView>
+                <ListView x:Name="ReviewList"
+                          ItemsSource="{Binding Reviews}"
+                          CachingStrategy="RecycleElement"
+                          HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="Item">
+                                <StackLayout Orientation="Vertical">
+                                    <Label FontSize="Micro" Text="{Binding id, StringFormat='ID: {0}'}"/>
+                                    <Label FontSize="Micro" Text="{Binding rating, StringFormat='Stars: {0}'}"/>
+                                    <Label FontSize="Micro" Text="{Binding text, StringFormat='Review: {0}'}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
-            <!--<ListView x:Name="DetailListView"
-                      ItemsSource="{Binding BizDetails}"
-                      ItemTapped="DetailListView_ItemTapped"
-                      CachingStrategy="RecycleElement"
-                      HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell x:Name="Item">
-                            <StackLayout Orientation="Vertical">
-                                <L
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                
-            </ListView>-->
-        </ScrollView>
+        </StackLayout>
+
 
     </ContentPage.Content>
 </ContentPage>

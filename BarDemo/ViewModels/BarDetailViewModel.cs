@@ -204,10 +204,12 @@ namespace BarDemo.ViewModels
             foreach (var review in BR.reviews)
             {
                 
-                Reviews.Add(review);
-                Console.WriteLine(review.text);
+                _reviews.Add(review);
+                //Console.WriteLine(review.text);
             }
-
+            Console.WriteLine(Reviews[0].text);
+            Console.WriteLine(Reviews[1].text);
+            Console.WriteLine(Reviews[2].text);
         }
 
 
