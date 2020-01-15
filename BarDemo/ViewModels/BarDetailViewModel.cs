@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BarDemo.Services;
 using BarDemo.Models;
 using System.Threading;
-
+using System.Collections.ObjectModel;
 
 namespace BarDemo.ViewModels
 {
@@ -85,6 +85,27 @@ namespace BarDemo.ViewModels
             }
         }
 
+        YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
+
+        BizReviews _br;
+        public BizReviews BR
+        {
+            get { return _br; }
+            set { _br = value; }
+        }
+
+        ObservableCollection<Review> _reviews;
+        public ObservableCollection<Review> Reviews
+        {
+            get { return _reviews; }
+            set
+            {
+                _reviews = value;
+                OnPropertyChanged();
+            }
+        }
+        
+
         public BarDetailViewModel(INavService navService) : base(navService)
         {
 
@@ -98,17 +119,18 @@ namespace BarDemo.ViewModels
 
         public override async Task Init(Business biz)
         {
-            _bar = biz;
+            Bar = biz;
             string id = Bar.id;
+
             await get_bar_details(id);
             get_hour_details();
+            await get_bar_reviews();
 
         }
 
         public async Task get_bar_details(string id)
         {
             BizDetails = new BizDetails();
-            YelpDataService yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
             BizDetails = await yds.BusinessSearch(id);
             BizName = BizDetails.name;
 
@@ -165,6 +187,27 @@ namespace BarDemo.ViewModels
 
 
             }
+        }
+
+        public async Task get_bar_reviews()
+        {
+            try
+            {
+                BR = new BizReviews();
+                Reviews = new ObservableCollection<Review>();
+                BR = await yds.BusinessSearch(Bar.id, "reviews");
+            }
+            catch
+            {
+                Console.WriteLine("Issue with YDS");
+            }
+            foreach (var review in BR.reviews)
+            {
+                
+                Reviews.Add(review);
+                Console.WriteLine(review.text);
+            }
+
         }
 
 
