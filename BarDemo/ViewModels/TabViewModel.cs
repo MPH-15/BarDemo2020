@@ -17,9 +17,8 @@ using Xamarin.Auth;
 
 namespace BarDemo.ViewModels
 {
-    public class SearchViewModel : BaseViewModel<FBUser>
+    public class TabViewModel : BaseViewModel<FBUser>
     {
-
         FBUser _fbUser;
         public FBUser FB_User
         {
@@ -28,32 +27,30 @@ namespace BarDemo.ViewModels
             {
                 _fbUser = value;
                 OnPropertyChanged();
+                //LoadProfilePage(FB_User);
             }
         }
 
-        public SearchViewModel(INavService navService) : base(navService)
+        public TabViewModel(INavService navService) : base(navService)
         {
-            //ExecuteBarListCommand();
-        }
 
+        }
 
         public override async Task Init()
         {
 
         }
 
-        public override async Task Init(FBUser fbUser)
+        public override async Task Init(FBUser fb_user)
         {
-            FB_User = fbUser;
-            Debug.WriteLine("ProfileViewModel: UserName: " + FB_User.Name);
+            FB_User = fb_user;
+            Debug.WriteLine("TabViewModel: UserName: " + FB_User.Name);
         }
 
-        //async Task ExecuteBarListCommand()
+        //async Task LoadProfilePage(FBUser fb_user)
         //{
-        //    await NavService.NavigateTo<BarListViewModel>();
-        //    await NavService.RemoveLastView();
+        //    await NavService.NavigateTo<ProfileViewModel, FBUser>(fb_user);
         //}
 
     }
 }
-

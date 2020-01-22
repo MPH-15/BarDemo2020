@@ -5,11 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using BarDemo.Views;
 using BarDemo.Services;
+using BarDemo.Models;
+using System.Diagnostics;
 
 namespace BarDemo.ViewModels
 {
-    class ProfileViewModel : BaseViewModel
+    class ProfileViewModel : BaseViewModel<FBUser>
     {
+        FBUser _fbUser;
+        public FBUser FB_User
+        {
+            get { return _fbUser; }
+            set
+            {
+                _fbUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         public ProfileViewModel(INavService navService) : base(navService)
         {
@@ -19,22 +33,15 @@ namespace BarDemo.ViewModels
         public override async Task Init()
         {
 
+
+
         }
 
-        string username = string.Empty;
-        public string Username
+        public override async Task Init(FBUser fbUser)
         {
-            get => username;
-            set
-            {
-                if (username == value)
-                    return;
-                username = value;
-
-            }
+            FB_User = fbUser;
+            Debug.WriteLine("ProfileViewModel: UserName: " + FB_User.Name);
         }
-
-
 
     }
 }

@@ -43,6 +43,7 @@ namespace BarDemo
 
             navService.XamarinFormsNav = MainPage.Navigation;
 
+            navService.RegisterViewMapping(typeof(TabViewModel), typeof(TabPage));
             navService.RegisterViewMapping(typeof(SearchViewModel), typeof(TabPage));
             navService.RegisterViewMapping(typeof(LoginViewModel), typeof(LoginPage));
             navService.RegisterViewMapping(typeof(ProfileViewModel), typeof(ProfilePage));
