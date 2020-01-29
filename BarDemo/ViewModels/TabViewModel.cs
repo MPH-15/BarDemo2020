@@ -45,6 +45,9 @@ namespace BarDemo.ViewModels
         {
             FB_User = fb_user;
             Debug.WriteLine("TabViewModel: UserName: " + FB_User.Name);
+
+            MessagingCenter.Send<TabViewModel, FBUser>(this, "UserData", FB_User);
+
         }
 
         //async Task LoadProfilePage(FBUser fb_user)
