@@ -6,14 +6,18 @@ namespace BarDemo.Models
     [JsonObject]
     public class FBUser
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("name")]
+        public string id { get; set; }
         public string Name { get; set; }
-
-        [JsonProperty("gender")]
         public string Gender { get; set; }
-
+        public string DoB { get; set; }
+        public AgeRange age_range { get; set; }
     }
+
+    [JsonObject]
+    public class AgeRange
+    {
+        public int min { get; set; }
+        public int max { get; set; }
+    }
+
 }

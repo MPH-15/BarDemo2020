@@ -36,6 +36,7 @@ namespace BarDemo.Views
         {
             if (_vm.Bar == null)
             {
+                
                 return;
             }
 
@@ -81,6 +82,6 @@ namespace BarDemo.Views
         }
 
 
-
+        
     }
 }

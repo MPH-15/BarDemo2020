@@ -16,7 +16,6 @@ namespace BarDemo.Views
 {
     public partial class LoginPage : ContentPage
     {
-
         LoginViewModel _vm
         {
             get { return BindingContext as LoginViewModel; }
@@ -31,7 +30,6 @@ namespace BarDemo.Views
             InitializeComponent();
             // store = AccountStore.Create();
 
-            //BindingContext = new LoginViewModel();
             BindingContext = new LoginViewModel(DependencyService.Get<INavService>());
 
             if (IsBusy)

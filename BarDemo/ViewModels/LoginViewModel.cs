@@ -21,7 +21,6 @@ namespace BarDemo.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public bool GMailAuth;
         public bool FBAuth;
         Account account;
 
@@ -86,7 +85,7 @@ namespace BarDemo.ViewModels
 
             var FBauthenticator = new OAuth2Authenticator(
              clientId: clientId,
-             scope: "email, user_gender",
+             scope: "email, user_gender, user_birthday,user_age_range",
              authorizeUrl: new Uri(Constants.FBAuthorizeUrl),
              redirectUrl: new Uri(Constants.FBiOSRedirectUrl),
              isUsingNativeUI: false
@@ -97,6 +96,8 @@ namespace BarDemo.ViewModels
 
             AuthenticationState.Authenticator = FBauthenticator;
 
+
+
             var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
             presenter.Login(FBauthenticator);
 
@@ -106,6 +107,15 @@ namespace BarDemo.ViewModels
 
         public async void OnFBAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
+            try
+            {
+                await SecureStorage.SetAsync("oauth_token", e.Account.ToString());
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
+
             var authenticator = sender as OAuth2Authenticator;
             if (authenticator != null)
             {
@@ -121,7 +131,7 @@ namespace BarDemo.ViewModels
 
                 var request = new OAuth2Request(
                     "GET",
-                    new Uri("https://graph.facebook.com/me?fields=name,gender"),
+                    new Uri("https://graph.facebook.com/me?fields=name,gender,birthday,age_range"),
                     null,
                     e.Account);
 
@@ -133,6 +143,9 @@ namespace BarDemo.ViewModels
 
                     Debug.WriteLine("User Name: " + user.Name);
                     Debug.WriteLine("User Gender: " + user.Gender);
+                    Debug.WriteLine("User Birthday: " + user.DoB);
+                    Debug.WriteLine("Age Range: " + user.age_range.min);
+                    Debug.WriteLine("Age Range: " + user.age_range.max);
 
                 }
 
@@ -143,11 +156,10 @@ namespace BarDemo.ViewModels
                     Debug.WriteLine("Account isn't null");
                 }
 
-                await ExecuteSearchCommand();
+                await ExecuteSearchCommand(user);
 
             }
         }
-
 
 
 
@@ -156,12 +168,13 @@ namespace BarDemo.ViewModels
             FBLoginButtonClicked();
         }
 
-        async Task ExecuteSearchCommand()
+
+        async Task ExecuteSearchCommand(FBUser fb_user)
         {
-            //await NavService.NavigateTo<BarListViewModel>();
-            await NavService.NavigateTo<SearchViewModel>();
+            await NavService.NavigateTo<TabViewModel, FBUser>(fb_user);
             await NavService.RemoveLastView();
         }
+
 
 
     }
