@@ -21,7 +21,6 @@ namespace BarDemo.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public bool GMailAuth;
         public bool FBAuth;
         Account account;
 
@@ -172,12 +171,8 @@ namespace BarDemo.ViewModels
 
         async Task ExecuteSearchCommand(FBUser fb_user)
         {
-            //await NavService.NavigateTo<BarListViewModel>();
-            //await NavService.NavigateTo<SearchViewModel, FBUser>(fb_user);
             await NavService.NavigateTo<TabViewModel, FBUser>(fb_user);
-            //await NavService.NavigateTo<ProfileViewModel, FBUser>(fb_user);
             await NavService.RemoveLastView();
-
         }
 
 

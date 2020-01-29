@@ -26,12 +26,6 @@ namespace BarDemo.Views
         
         }
 
-        public void printUser()
-        {
-            string name = _vm.FB_User.Name;
-            Debug.WriteLine("Tab Page : UserName: " + name);
-
-        }
 
 
 
@@ -39,7 +33,7 @@ namespace BarDemo.Views
         {
             if (args.PropertyName == nameof(TabViewModel.FB_User))
             {
-                printUser();
+
             }
         }
 
