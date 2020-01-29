@@ -7,61 +7,70 @@
         <Label Text="{Binding BizName}" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <ScrollView>
+
             <StackLayout Orientation="Vertical">
-                <TableView>
+            <StackLayout>
+                <TableView HasUnevenRows="True">
                     <TableRoot>
                         <TableSection>
-                            <ViewCell>
+                            <ViewCell Height="20">
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.address1, StringFormat='{}{0},'}"/>
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.city, StringFormat='{}{0}, '}"/>
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.state, StringFormat='{}{0}, '}"/>
-                                    <Label FontSize="Small" Text="{Binding BizDetails.location.zip_code, StringFormat='{}{0} '}"/>
+                                    <ImageButton Source="directions.png"/>
+                                    <ImageButton Source="call.jpg"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Image Source="placeholder.png"/>
+                                    <Label FontSize="Micro"  Text="{Binding BizDetails.location.address1, StringFormat='{}{0},'}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.location.city, StringFormat='{}{0}, '}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.location.state, StringFormat='{}{0}, '}"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.location.zip_code, StringFormat='{}{0} '}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Small" Text="{Binding BizDetails.phone}"/>
+                                    <Image Source="placeholder.png"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.phone}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
-                                    <Label FontSize="Small" Text="{Binding BizDetails.url}"/>
+                                    <Image Source="placeholder.png"/>
+                                    <Label FontSize="Micro" Text="{Binding BizDetails.url}"/>
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <!--<Image Source="placeholder.png"/>-->
-                                    <Label Text="{Binding BizDetails.hours[0].open[0].start}"/>
-                                    <Label Text=" - "/>
-                                    <Label Text="{Binding BizDetails.hours[0].open[0].end}"/>
+                                    <Image Source="placeholder.png"/>
+                                    <Label FontSize="Micro" Text="{Binding DayOfWeek}"/>
+                                    <Label FontSize="Micro" Text="{Binding HoursStart}"/>
+                                    <Label FontSize="Micro" Text=" - "/>
+                                    <Label FontSize="Micro" Text="{Binding HoursEnd}"/>
                                 </StackLayout>
                             </ViewCell>
                         </TableSection>
                     </TableRoot>
                 </TableView>
+                <ListView x:Name="ReviewList"
+                          ItemsSource="{Binding Reviews}"
+                          CachingStrategy="RecycleElement"
+                          HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="Item">
+                                <StackLayout Orientation="Vertical">
+                                    <Label FontSize="Micro" Text="{Binding id, StringFormat='ID: {0}'}"/>
+                                    <Label FontSize="Micro" Text="{Binding rating, StringFormat='Stars: {0}'}"/>
+                                    <Label FontSize="Micro" Text="{Binding text, StringFormat='Review: {0}'}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
-            <!--<ListView x:Name="DetailListView"
-                      ItemsSource="{Binding BizDetails}"
-                      ItemTapped="DetailListView_ItemTapped"
-                      CachingStrategy="RecycleElement"
-                      HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell x:Name="Item">
-                            <StackLayout Orientation="Vertical">
-                                <L
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                
-            </ListView>-->
-        </ScrollView>
+        </StackLayout>
+
 
     </ContentPage.Content>
 </ContentPage>
