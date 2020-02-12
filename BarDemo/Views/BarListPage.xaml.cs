@@ -9,6 +9,10 @@ using Xamarin.Forms.Xaml;
 using BarDemo.ViewModels;
 using BarDemo.Services;
 using BarDemo.Models;
+using Plugin.Geolocator;
+using Plugin.Permissions.Abstractions;
+
+
 
 
 namespace BarDemo.Views
@@ -46,20 +50,42 @@ namespace BarDemo.Views
 
         }
 
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var hasPermission = await Utils.CheckPermissions(Permission.Location);
+                //if (!hasPermission)
+                //    return;
 
-        //private async void Button_Clicked(object sender, EventArgs e)
-        //{
-        //    //if (e.Item == null)
-        //    //    return;
+                //ButtonGetGPS.IsEnabled = false;
 
-        //    var bar = (Business)e.Item;
-        //    Console.WriteLine(bar.name);
-        //    //_vm.BarCommand.Execute(bar);
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 50;
+                //labelGPS.Text = "Getting gps...";
 
-        //    await DisplayAlert("Item Tapped", "A map button was tapped.", "OK");
+                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null);
 
-        //    //Deselect Item
-        //    //((ListView)sender).SelectedItem = null
-        //}
+                if (position == null)
+                {
+                    //labelGPS.Text = "null gps :(";
+                    return;
+                }
+                //savedPosition = position;
+                //ButtonAddressForPosition.IsEnabled = true;
+                Console.WriteLine(string.Format("Time: {0} \nLat: {1} \nLong: {2} \nAltitude: {3} \nAltitude Accuracy: {4} \nAccuracy: {5} \nHeading: {6} \nSpeed: {7}",
+                    position.Timestamp, position.Latitude, position.Longitude,
+                    position.Altitude, position.AltitudeAccuracy, position.Accuracy, position.Heading, position.Speed));
+                _vm.Latitude = position.Latitude.ToString();
+                _vm.Longitude = position.Longitude.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Uh oh", "Something went wrong, but don't worry we captured for analysis! Thanks.", "OK");
+            }
+
+        }
+
     }
 }

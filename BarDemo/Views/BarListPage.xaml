@@ -4,6 +4,9 @@
              x:Class="BarDemo.Views.BarListPage"
              Title="Bar List"
              Icon="search.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="location.png" Text="Get Location" Clicked="Button_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <StyleSheet Source="/Styles/mycss.css"/>
@@ -13,6 +16,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ScrollView>
         <ListView x:Name="MyListView"
             ItemsSource="{Binding Blist}"

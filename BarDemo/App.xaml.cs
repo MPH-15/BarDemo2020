@@ -5,6 +5,10 @@ using BarDemo.Services;
 using BarDemo.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+
+
 
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -68,5 +72,6 @@ namespace BarDemo
         {
             // Handle when your app resumes
         }
+
     }
 }

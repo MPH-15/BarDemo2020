@@ -58,14 +58,14 @@ namespace BarDemo.ViewModels
         public BarListViewModel(INavService navService) : base(navService)
         {
             _blist = new ObservableCollection<Business>();
-
-            get_coordinates();
+            //CrossPermissions.Current.OpenAppSettings();
+            //get_coordinates();
 
             Console.WriteLine(Longitude);
             Console.WriteLine(Latitude);
 
-            //Add parameters for search
-            //SearchYelp("bars", 10, "san antonio");
+            //Add parameters for search Default Search if GPS not enabled
+            SearchYelp("bars", 10, "san antonio");
 
             //Executes when ViewMapButton is Clicked
             ViewMapButtonCommand = new Command<Business>(async (biz) => await ExecuteBarClickedCommand(biz));
@@ -83,14 +83,15 @@ namespace BarDemo.ViewModels
             var yds = new YelpDataService(new Uri("https://api.yelp.com/v3/"));
             yelpsearch = await yds.BusinessSearch(keyword, limit, location  );
 
+
             Console.WriteLine(yelpsearch.total);
 
             //add businesses to observable collection to be displayed on barlist page
             for (int i = 0; i < limit; i++)
             {
 
-                _blist.Add(yelpsearch.businesses[i]);
-                _blist[i].distance = (int)yelpsearch.businesses[i].distance;
+                Blist.Add(yelpsearch.businesses[i]);
+                Blist[i].distance = (int)yelpsearch.businesses[i].distance;
                 Console.WriteLine(_blist[i].name);
                 Console.WriteLine("Lattitude: " + _blist[i].coordinates.latitude);
                 Console.WriteLine("Longitude: " + _blist[i].coordinates.longitude);
@@ -104,13 +105,14 @@ namespace BarDemo.ViewModels
             yelpsearch = await yds.BusinessSearch(latitude, longitude, limit);
 
             Console.WriteLine(yelpsearch.total);
+            Blist.Clear();
 
             //add businesses to observable collection to be displayed on barlist page
             for (int i = 0; i < limit; i++)
             {
-
-                _blist.Add(yelpsearch.businesses[i]);
-                _blist[i].distance = (int)yelpsearch.businesses[i].distance;
+                
+                Blist.Add(yelpsearch.businesses[i]);
+                Blist[i].distance = (int)yelpsearch.businesses[i].distance;
                 Console.WriteLine(_blist[i].name);
                 Console.WriteLine("Lattitude: " + _blist[i].coordinates.latitude);
                 Console.WriteLine("Longitude: " + _blist[i].coordinates.longitude);
@@ -132,36 +134,37 @@ namespace BarDemo.ViewModels
 
         public async Task get_coordinates()
         {
-            var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 50;
-            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
-
-            Console.WriteLine(position.Longitude.ToString());
-            Console.WriteLine(position.Latitude.ToString());
-            Latitude = position.Latitude.ToString();
-            Longitude = position.Longitude.ToString();
-            
-
-            Console.WriteLine(Longitude);
-            Console.WriteLine(Latitude);
-
-            var loc_available = CrossGeolocator.Current.IsGeolocationAvailable;
-            var loc_enabled = CrossGeolocator.Current.IsGeolocationEnabled;
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-
-            Console.WriteLine(status);
-            Console.WriteLine(loc_available);
-            Console.WriteLine(loc_enabled);
-            if (status != PermissionStatus.Granted)
+            try
             {
-                //if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-                //{
-                //    await Application.Current?.MainPage?.DisplayAlert("Need location", "Gunna need that location", "OK");
-                //}
-                CrossPermissions.Current.OpenAppSettings();
-                Console.WriteLine(status);
-                Console.WriteLine(loc_available);
-                Console.WriteLine(loc_enabled);
+                var hasPermission = await Utils.CheckPermissions(Permission.Location);
+                //if (!hasPermission)
+                //    return;
+
+                //ButtonGetGPS.IsEnabled = false;
+
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 50;
+                //labelGPS.Text = "Getting gps...";
+
+                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null);
+
+                if (position == null)
+                {
+                    //labelGPS.Text = "null gps :(";
+                    return;
+                }
+                //savedPosition = position;
+                //ButtonAddressForPosition.IsEnabled = true;
+                Console.WriteLine(string.Format("Time: {0} \nLat: {1} \nLong: {2} \nAltitude: {3} \nAltitude Accuracy: {4} \nAccuracy: {5} \nHeading: {6} \nSpeed: {7}",
+                    position.Timestamp, position.Latitude, position.Longitude,
+                    position.Altitude, position.AltitudeAccuracy, position.Accuracy, position.Heading, position.Speed));
+                Latitude = position.Latitude.ToString();
+                Longitude = position.Longitude.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Uh oh", "Something went wrong, but don't worry we captured for analysis! Thanks.", "OK");
             }
 
 
