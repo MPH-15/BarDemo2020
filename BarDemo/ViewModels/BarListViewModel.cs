@@ -7,6 +7,7 @@ using BarDemo.Models;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace BarDemo.ViewModels
 {
@@ -23,12 +24,27 @@ namespace BarDemo.ViewModels
             }
         }
 
+        int _radius;
+        public int Radius
+        {
+            get { return _radius; }
+            set
+            {
+                _radius = value;
+                Debug.WriteLine($"BarListViewModel: The value of radius is {value}");
+                //OnPropertyChanged();
+            }
+        }
+
         public ICommand ViewMapButtonCommand { get; }
         private YelpBizSearch yelpsearch = new YelpBizSearch();
 
         public BarListViewModel(INavService navService) : base(navService)
         {
             _blist = new ObservableCollection<Business>();
+
+            _radius = new Int32();
+
 
             //Add parameters for search
             SearchYelp("bars", 10, "san antonio");
@@ -75,6 +91,7 @@ namespace BarDemo.ViewModels
             await NavService.NavigateTo<BarDetailViewModel, Business>(biz);
 
         }
+
 
     }
 }

@@ -19,6 +19,8 @@ namespace BarDemo.Views
         }
 
 
+
+
         public ProfilePage()
         {
             InitializeComponent();
@@ -55,6 +57,17 @@ namespace BarDemo.Views
         }
 
 
-        
+        void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
+        {
+            double value = args.NewValue;
+            int radius = Convert.ToInt32(value);
+            Debug.WriteLine("ProfilePage: The radius value is {0}", radius);
+
+            // _blvm.Radius = radius;
+            //_blvm.Radius = radius;
+        }
+    
+
+
     }
 }

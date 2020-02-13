@@ -13,7 +13,6 @@ using BarDemo.Views;
 using BarDemo.Services;
 using BarDemo.Models;
 using System.Threading.Tasks;
-using Xamarin.Auth;
 
 
 
@@ -107,14 +106,18 @@ namespace BarDemo.ViewModels
 
         public async void OnFBAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
+          // The SecureStorage won't work until an Apple Developer Account is created
             try
             {
                 await SecureStorage.SetAsync("oauth_token", e.Account.ToString());
+                Debug.WriteLine("Securely Storing Access Token");
             }
             catch (Exception ex)
             {
                 // Possible that device doesn't support secure storage on device.
+                Debug.WriteLine("SecureStorage.SetAsync Exception Caught");
             }
+
 
             var authenticator = sender as OAuth2Authenticator;
             if (authenticator != null)

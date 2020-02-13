@@ -38,6 +38,13 @@ namespace BarDemo.Views
         }
 
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
+        }
+
         void FBCommand(object sender, EventArgs e)
         {
             var item = sender;

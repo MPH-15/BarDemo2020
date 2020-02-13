@@ -25,7 +25,7 @@
         </StackLayout>
         <StackLayout Orientation="Horizontal">
           <Label FontSize="14" Text="Age:" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
-          <Entry HorizontalOptions="FillAndExpand" Text="{Binding FB_User.DoB}" TextColor="White" BackgroundColor="Maroon" />
+          <Entry HorizontalOptions="FillAndExpand" Text="{Binding Age}" TextColor="White" BackgroundColor="Maroon" />
         </StackLayout>
         <StackLayout Orientation="Horizontal">
           <Label FontSize="14" Text="Gender:" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
@@ -34,6 +34,18 @@
         <StackLayout Orientation="Horizontal">
           <Label FontSize="14" Text="Ask me about:" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
           <Entry HorizontalOptions="FillAndExpand" Text="Xamarin, C#, .NET, Mono..." TextColor="White" BackgroundColor="Maroon" />
+        </StackLayout>
+        <StackLayout Spacing="0" BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+          <BoxView BackgroundColor="Maroon" WidthRequest="40" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="Center" />
+          <Label FontSize="14" TextColor="Black" Text="Interests" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Label FontSize="14" Text="Radius:" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+          <Slider x:Name="slider" Maximum="30" Minimum="1" ValueChanged="OnSliderValueChanged" HorizontalOptions="FillAndExpand"/>
+          <Label x:Name="displayLabel" Text="{Binding Source={x:Reference slider}, Path=Value, 
+               StringFormat='  {0:F0} Mile'}" TextColor="White"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
         </StackLayout>
       </StackLayout>
     </ScrollView>
