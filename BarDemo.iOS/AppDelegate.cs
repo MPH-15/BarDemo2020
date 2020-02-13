@@ -29,6 +29,7 @@ namespace BarDemo.iOS
 
             // runs without using Xamarin.FormsMaps.Init();
             Xamarin.FormsMaps.Init();
+            
 
             LoadApplication(new App());
 

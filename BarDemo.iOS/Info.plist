@@ -34,5 +34,11 @@
 	<string>BarDemo</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Allow app to access location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow app to access location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow app to access location</string>
 </dict>
 </plist>
