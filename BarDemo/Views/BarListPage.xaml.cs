@@ -54,7 +54,7 @@ namespace BarDemo.Views
         {
             try
             {
-                var hasPermission = await Utils.CheckPermissions(Permission.Location);
+                var hasPermission = await Utils.CheckPermissions(Permission.LocationWhenInUse);
                 //if (!hasPermission)
                 //    return;
 

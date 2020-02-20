@@ -19,7 +19,7 @@ namespace BarDemo.Services
             {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
-
+                    
                     var title = $"{permission} Permission";
                     var question = $"To use this plugin the {permission} permission is required. Please go into Settings and turn on {permission} for the app.";
                     var positive = "Settings";
@@ -28,6 +28,10 @@ namespace BarDemo.Services
                     if (task == null)
                         return permissionStatus;
 
+
+                    //var result0 = await CrossPermissions.Current.RequestPermissionsAsync(Permission.LocationWhenInUse);
+                    //if (result0.ContainsKey(Permission.LocationWhenInUse))
+                    //    permissionStatus = result0[Permission.LocationWhenInUse];
                     var result = await task;
                     if (result)
                     {
