@@ -61,10 +61,10 @@ namespace BarDemo.Views
         {
             double value = args.NewValue;
             int radius = Convert.ToInt32(value);
-            Debug.WriteLine("ProfilePage: The radius value is {0}", radius);
+            
+            _vm.Radius = radius;
 
-            // _blvm.Radius = radius;
-            //_blvm.Radius = radius;
+
         }
     
 

@@ -24,27 +24,24 @@ namespace BarDemo.ViewModels
             }
         }
 
-        int _radius;
-        public int Radius
-        {
-            get { return _radius; }
-            set
-            {
-                _radius = value;
-                Debug.WriteLine($"BarListViewModel: The value of radius is {value}");
-                //OnPropertyChanged();
-            }
-        }
+
 
         public ICommand ViewMapButtonCommand { get; }
         private YelpBizSearch yelpsearch = new YelpBizSearch();
 
         public BarListViewModel(INavService navService) : base(navService)
         {
+            MessagingCenter.Subscribe<ProfileViewModel, int>(this, "RadiusSliderValue", async (sender, arg) =>
+            {
+
+                Debug.WriteLine("BarListViewModel: In Messaging Center");
+                Debug.WriteLine("BLVM Radius: " + arg);
+
+            });
+
+
+
             _blist = new ObservableCollection<Business>();
-
-            _radius = new Int32();
-
 
             //Add parameters for search
             SearchYelp("bars", 10, "san antonio");

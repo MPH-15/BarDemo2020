@@ -44,7 +44,6 @@ namespace BarDemo.ViewModels
         {
             FB_User = fb_user;
             MessagingCenter.Send<TabViewModel, FBUser>(this, "UserData", FB_User);
-
         }
 
 

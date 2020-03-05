@@ -44,6 +44,18 @@ namespace BarDemo.ViewModels
             }
         }
 
+        int _radius;
+        public int Radius
+        {
+            get { return _radius; }
+            set
+            {
+                _radius = value;
+                MessagingCenter.Send<ProfileViewModel, int>(this, "RadiusSliderValue", Radius);
+                OnPropertyChanged();
+            }
+        }
+
 
 
 
